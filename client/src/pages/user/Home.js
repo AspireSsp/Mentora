@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import { UserState } from '../context/user';
+import { UserState } from '../../context/user';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import { baseUrl } from "../apis";
+import { baseUrl } from "../../apis";
 import { useToast } from '@chakra-ui/react'
-import Post from '../component/Post';
+import Post from '../../component/Post';
 const Home = () => {
   const { user, setUser } = UserState();
   const toast = useToast()

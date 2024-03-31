@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import { baseUrl } from '../apis';
+import { baseUrl } from '../../apis';
 
 const Login = () => {
   const[email, setEmail] = useState('');
