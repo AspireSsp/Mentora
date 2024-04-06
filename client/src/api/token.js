@@ -1,4 +1,5 @@
 export const getToken = ()=>{
-    const token = JSON.parse(localStorage.getItem('token'));
+    const tkn = sessionStorage.getItem('token') || localStorage.getItem('token')
+    const token = JSON.parse(tkn);
     return token
 }

@@ -1,11 +1,14 @@
 const express = require('express');
-const { register, login, getUser } = require('../controller/user');
+const { register, login, getUser, updateMentorProfile, updateMenteeProfile } = require('../controller/user');
 const authenticate = require('../middlewares/auth');
 const router = express.Router();
 
 router.route("/register").post(register)
 router.route("/login").post(login)
 router.route("/get").get(authenticate, getUser);
+
+router.route("/mentor/update").patch(authenticate, updateMentorProfile);
+router.route("/mentee/update").patch(authenticate, updateMenteeProfile);
 
 
 module.exports = router; 

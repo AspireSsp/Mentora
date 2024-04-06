@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import { UserState } from '../../context/user';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import { baseUrl } from "../../apis";
 import { useToast } from '@chakra-ui/react'
 import Post from '../../component/Post';
+import { baseUrl } from '../../api/apis';
 const Home = () => {
   const { user, setUser } = UserState();
   const toast = useToast()
@@ -24,6 +24,9 @@ const Home = () => {
         console.log(res); 
         if(res.status===200){
           setUser(res.data.user);
+          if(res.data.user.role === "Mentor"){
+            navigate('/mentor');
+          }
         } 
       } catch (error) {
         navigate('/login');

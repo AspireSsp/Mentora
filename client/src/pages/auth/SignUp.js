@@ -17,9 +17,9 @@ import {
 import { useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import axios from 'axios';
-import { baseUrl } from '../../apis';
 import { useNavigate, Link } from "react-router-dom";
 import { useToast } from '@chakra-ui/react'
+import { baseUrl } from '../../api/apis';
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false)

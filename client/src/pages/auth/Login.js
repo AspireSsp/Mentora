@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import { baseUrl } from '../../apis';
+import { baseUrl } from '../../api/apis';
 
 const Login = () => {
   const[email, setEmail] = useState('');
@@ -32,7 +32,7 @@ const Login = () => {
       if(res.status===200){
         setEmail('')
         setPassword('')
-        navigate('/');
+        navigate('/mentor');
         toast({
           title: 'Login Success.',
           description: "You've loged in your account successfully",
