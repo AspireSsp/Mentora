@@ -4,6 +4,12 @@ import SignUp from './pages/auth/SignUp';
 import ErrorPage from './pages/ErrorPage';
 import Navbar from './component/Navbar';
 import { Home } from "./pages/common/Home";
+import SidebarWithHeader from './component/SideNav'
+import Profile from "./pages/mentor/Profile";
+import Chat from "./pages/mentor/Chat";
+import Clients from "./pages/mentor/Clients";
+import Payment from "./pages/mentor/Payment";
+import Reviews from "./pages/mentor/Reviews";
 
 function App() {
    
