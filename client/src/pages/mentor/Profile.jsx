@@ -3,6 +3,7 @@ import EditAbout from './dialogBoxes/EditAbout'
 import EditProfile from './dialogBoxes/EditProfile'
 import { UserState } from '../../context/user';
 import { formatDate } from '../../utills/formateDate';
+import EditExperience from './dialogBoxes/EditExperience';
 
 const Profile = () => {
     const { user, setUser } = UserState();
@@ -100,6 +101,9 @@ const Profile = () => {
                             {/* Experience section */}
                             <div class="bg-white p-3 shadow-sm rounded-sm">
 
+                                <div className='flex justify-end'>
+                                    <EditExperience />
+                                </div>
                                 <div class="grid grid-cols-2">
                                     <div>
                                         <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
@@ -113,22 +117,15 @@ const Profile = () => {
                                             <span class="tracking-wide">Experience</span>
                                         </div>
                                         <ul class="list-inside space-y-2">
-                                            <li>
-                                                <div class="text-teal-600">Owner at Her Company Inc.</div>
-                                                <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                                            </li>
-                                            <li>
-                                                <div class="text-teal-600">Owner at Her Company Inc.</div>
-                                                <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                                            </li>
-                                            <li>
-                                                <div class="text-teal-600">Owner at Her Company Inc.</div>
-                                                <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                                            </li>
-                                            <li>
-                                                <div class="text-teal-600">Owner at Her Company Inc.</div>
-                                                <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                                            </li>
+                                            {
+                                                user?.experience && user?.experience.map((experience, index)=>(
+                                                    <li key={index}>
+                                                        <div class="text-teal-600">{experience?.role} at {experience?.company}</div>
+                                                        <div class="text-gray-500 text-xs">{formatDate(experience?.startDate)} to {formatDate(experience?.endDate)}</div>
+                                                    </li>
+                                                ))
+                                            }
+                                            
                                         </ul>
                                     </div>
                                     <div>
@@ -146,14 +143,15 @@ const Profile = () => {
                                             <span class="tracking-wide">Education</span>
                                         </div>
                                         <ul class="list-inside space-y-2">
-                                            <li>
-                                                <div class="text-teal-600">Masters Degree in Oxford</div>
-                                                <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                                            </li>
-                                            <li>
-                                                <div class="text-teal-600">Bachelors Degreen in LPU</div>
-                                                <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                                            </li>
+                                            {
+                                                user?.education && user?.education.map((education, index)=>(
+                                                    <li key={index}>
+                                                        <div class="text-teal-600">{education?.degree}, {education?.field}</div>
+                                                        <div class="text-teal-600">{education?.school}</div>
+                                                        <div class="text-gray-500 text-xs">{formatDate(education?.startDate)} to {formatDate(education?.endDate)}</div>
+                                                    </li>
+                                                ))
+                                            }
                                         </ul>
                                     </div>
                                 </div>
