@@ -95,6 +95,12 @@ export default function WithAction() {
     }
   };
 
+  const logout =()=>{
+    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+    navigate(`/login`)
+  }
+
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={5} py={5}>
@@ -107,7 +113,7 @@ export default function WithAction() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"} width={'100%'} justifyContent={'space-between'} mx={8}>
-          <Image src={logo} alt="Mentora Logo" width={250} />
+          <Image src={logo} alt="Mentora Logo" width={250} onClick={()=>navigate('/')} cursor='pointer' />
             <HStack
               as={"nav"}
               spacing={4}
@@ -140,19 +146,11 @@ export default function WithAction() {
                 />
               </MenuButton>
               <MenuList fontWeight={600} fontSize={'16px'}>
-              <Link to={`/mentee/profile`}> {/* Use Link component */}
+              <Link to={`/mentee/profile`}> 
                <MenuItem>Profile</MenuItem>
               </Link> 
-              <Link to={`/mentee/profile`}> {/* Use Link component */}
-               <MenuItem></MenuItem>
-              </Link> 
-              <Link to={`/mentee/profile`}> {/* Use Link component */}
-               <MenuItem></MenuItem>
-              </Link> 
                 <MenuDivider />
-              <Link to={`/mentee/`}> {/* Use Link component */}
-               <MenuItem>Log out</MenuItem>
-              </Link>                
+               <MenuItem  onClick={logout}>Log out</MenuItem>
               </MenuList>
             </Menu>
           </Flex>

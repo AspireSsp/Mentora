@@ -11,10 +11,12 @@ import {
     useDisclosure,
     Text,
 } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom';
 
 
 const StartChat = ({ startChat, user, mentor }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const navigate = useNavigate();
     const cancelRef = React.useRef()
 
     const [balence, setBalence] = useState();
@@ -23,7 +25,7 @@ const StartChat = ({ startChat, user, mentor }) => {
     useEffect(() => {
         if (user && mentor) {
             setBalence(user.wallet);
-            const chargesPerMinute = mentor?.chargesPerMin; // Assuming chargesPerMinute is a property of the mentor object
+            const chargesPerMinute = mentor?.chargesPerMin; 
             const minutes = calculateTimeFromWallet(user.wallet, chargesPerMinute);
             setMin(minutes);
         }
@@ -72,7 +74,7 @@ const StartChat = ({ startChat, user, mentor }) => {
                         <AlertDialogFooter w={"100%"}>
                             <div className='flex justify-between w-[100%]'>
                                 <div>
-                                    <Button colorScheme='green' onClick={handleStartChat} ml={3}>
+                                    <Button colorScheme='green' onClick={()=>navigate(`/payment/${mentor.id}`)} ml={3}>
                                         Add Balance
                                     </Button>
                                 </div>
@@ -81,7 +83,7 @@ const StartChat = ({ startChat, user, mentor }) => {
                                         Cancel
                                     </Button>
                                     <Button colorScheme='blue' onClick={handleStartChat} ml={3}>
-                                        Yes
+                                        Start Chat
                                     </Button>
                                 </div>
                             </div>
