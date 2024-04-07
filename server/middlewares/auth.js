@@ -9,8 +9,10 @@ const authenticate = async (req, res, next) => {
         if (!token) {
             throw new Error('No token found');
         }
+        // console.log(token);
         const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
         const rootUser = await User.findOne({ _id: verifyToken._id });
+        // console.log(rootUser);
         if (!rootUser) {
             throw new Error('User not found');
         }

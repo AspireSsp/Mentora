@@ -78,10 +78,9 @@ const menteeSchema = new mongoose.Schema({
     profession: String,
     bio: String,
     education: String,
-    city: String,
-    state: String,
-    country: String,
-    wallet: Number
+    address: String,
+    gender: String,
+    wallet: Number,
 }, options);
 
 // Define the mentor schema
@@ -92,6 +91,14 @@ const mentorSchema = new mongoose.Schema({
     age: String,
     address: String,
     gender: String,
+    active: {
+        type: Boolean,
+        default: false,
+    },    
+    engaged: {
+        type: Boolean,
+        default: false,
+    },    
     education: [
         {
             school: String,
@@ -119,7 +126,7 @@ const mentorSchema = new mongoose.Schema({
             comment: String,
             createdAt: {
                 type: Date,
-                default: Date.now
+                default: Date.now()
             }
         }
     ],
@@ -145,3 +152,4 @@ module.exports = {
     Mentee,
     Mentor
 };
+
