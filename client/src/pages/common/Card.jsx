@@ -13,7 +13,7 @@ const Card = ({ data }) => {
   const navigate = useNavigate();
 
   const handleClick = (id) => {
-    navigate(`/mentor/${id}`);
+    navigate(`/mentors/profile/${id}`);
   };
 
   return (
@@ -29,12 +29,12 @@ const Card = ({ data }) => {
             boxShadow="lg"
             borderRadius="30px"
             overflow="hidden"
-            cursor="pointer"
+            // cursor="pointer"
             display="flex"
             justifyContent="space-between"
             flexDirection="column"
             alignItems="start"
-            onClick={() => handleClick(item._id)}
+            // onClick={() => handleClick(item._id)}
             height="400px"
             backgroundColor={'#ffffff'}
           >
@@ -80,13 +80,13 @@ const Card = ({ data }) => {
                 <Text fontWeight={500} fontSize="16px" color="#7a7a7a">
                   Price
                 </Text>
-                <Text fontWeight={700} fontSize="18px" color="#22c55e">₹200 /Min</Text>
+                <Text fontWeight={700} fontSize="18px" color="#22c55e">₹{item.chargesPerMin} /Min</Text>
               </Flex>
               <Flex>
                 <Button
                   alignSelf="center"
                   onClick={() => handleClick(item._id)}
-                  backgroundColor="#3b82f600"
+                  backgroundColor="#3b82f600"   
                   color="#3b82f6"
                   border="1px solid #3b82f6"
                   borderRadius={30}

@@ -14,11 +14,13 @@ import Home from "./pages/user/Home";
 import ProfileMentor from "./pages/mentee/ProfileMentor";
 import AllMentors from "./pages/common/AllMentors";
 import MenteeChat from './pages/mentee/Chat'
+import Checkout from "./pages/mentee/Checkout";
+
 
 function App() {
    
   return (
-    <div>
+    <div style={{margin:'0px', padding:"0px"}}>
       <BrowserRouter>
         <Routes>
 
@@ -28,9 +30,10 @@ function App() {
           {/* user routes are here */}
           <Route path="/" element={<Navbar />}>
             <Route index element={<Home />} />
-            <Route path="/mentors" element={<AllMentors/>}/>
+            <Route style={{margin:'0px', padding:"0px"}} path="/mentors" element={<AllMentors/>}/>
             <Route path="/mentors/profile/:id" element={<ProfileMentor/>}/>
             <Route path="/chat/:id" element={<MenteeChat/>}/>
+            <Route path="/payment/:id" element={<Checkout/>}/>
           </Route>
 
           <Route path="/mentee" element={<Navbar />}>

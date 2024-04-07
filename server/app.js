@@ -4,6 +4,7 @@ const app = express();
 const http = require('http');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser')
+const Razorpay = require('razorpay');
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -25,7 +26,6 @@ app.use("/api/v1/message/", message);
 app.get("/", (req, res)=>{
   res.status(200).json({success : true, message : "server is running ..."})
 })
-
 
 // socket implementation---------->
 const server = http.createServer(app); // Add this
