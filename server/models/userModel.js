@@ -3,9 +3,6 @@ const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-// Define the base schema with timestamps
-const baseOptions = { timestamps: true };
-
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -35,18 +32,24 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
     },
-}, baseOptions);
+    createdAt:{
+        type: Date,
+        default: Date.now(),
+    }
+
+},{ discriminatorKey: 'role', toJSON: { virtuals: true }, toObject: { virtuals: true } });
+
 
 //hashing the password...
-userSchema.pre('save', async function(next) {
-    if (this.isModified('password')) {
-        this.password = await bcrypt.hash(this.password, 12)
+userSchema.pre('save',async function (next){
+    if(this.isModified('password')){
+        this.password =await bcrypt.hash(this.password, 12)
     }
     next();
 });
 
 // Generating token
-userSchema.methods.generateAuthToken = async function() {
+userSchema.methods.generateAuthToken = async function () {
     try {
         let token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET);
         await this.save();
@@ -57,18 +60,18 @@ userSchema.methods.generateAuthToken = async function() {
 };
 
 //  token to reset password
-userSchema.methods.createPasswordResetToken = async function() {
+userSchema.methods.createPasswordResetToken = async function () {
     const resetToken = crypto.randomBytes(32).toString("hex");
     this.passwordResetToken = crypto
-        .createHash("sha256")
-        .update(resetToken)
-        .digest("hex");
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
     this.passwordResetExpires = Date.now() + 10 * 60 * 1000; //10 minutes
     return resetToken;
 };
 
 // Define a discriminator key
-const options = { discriminatorKey: 'role', timestamps: true };
+const options = { discriminatorKey: 'role' };
 
 // Define the mentee schema
 const menteeSchema = new mongoose.Schema({
@@ -79,49 +82,58 @@ const menteeSchema = new mongoose.Schema({
     state: String,
     country: String,
     wallet: Number
-}, { ...baseOptions, ...options });
+}, options);
 
 // Define the mentor schema
 const mentorSchema = new mongoose.Schema({
-    wallet: Number,
+    wallet : Number,
     title: String,
     bio: String,
+    age: String,
     address: String,
     gender: String,
-    education: [{
-        school: String,
-        degree: String,
-        field: String,
-        startDate: Date,
-        endDate: Date,
-    }],
-    experience: [{
-        role: String,
-        company: String,
-        startDate: Date,
-        endDate: Date,
-    }],
-    ratings: [{
-        userId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        },
-        rating: Number,
-        comment: String,
-        createdAt: {
-            type: Date,
-            default: Date.now
+    education: [
+        {
+            school: String,
+            degree: String,
+            field: String,
+            startDate: Date,
+            endDate: Date,
         }
-    }],
-    transactions: [{
-        transactionId: String,
-        amount: Number,
-        createdAt: {
-            type: Date,
-            default: Date.now
+    ],
+    experience: [
+        {
+            role: String,
+            company: String,
+            startDate: Date,
+            endDate: Date,
         }
-    }]
-}, { ...baseOptions, ...options });
+    ],
+    ratings: [
+        {
+            userId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
+            },
+            rating: Number,
+            comment: String,
+            createdAt: {
+                type: Date,
+                default: Date.now
+            }
+        }
+    ],
+    transactions: [
+        {
+            transactionId: String,
+            amount: Number,
+            createdAt: {
+                type: Date,
+                default: Date.now
+            }
+        }
+    ]
+}, options);
 
 // Create models
 const User = mongoose.model('User', userSchema);

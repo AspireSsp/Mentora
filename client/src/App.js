@@ -3,13 +3,15 @@ import Login from './pages/auth/Login';
 import SignUp from './pages/auth/SignUp';
 import ErrorPage from './pages/ErrorPage';
 import Navbar from './component/Navbar';
-import { Home } from "./pages/common/Home";
 import SidebarWithHeader from './component/SideNav'
 import Profile from "./pages/mentor/Profile";
 import Chat from "./pages/mentor/Chat";
 import Clients from "./pages/mentor/Clients";
 import Payment from "./pages/mentor/Payment";
 import Reviews from "./pages/mentor/Reviews";
+import ProfileMentee from "./pages/mentee/Profile";
+import Home from "./pages/user/Home";
+
 
 function App() {
    
@@ -19,8 +21,9 @@ function App() {
         <Routes>
 
           {/* user routes are here */}
-          <Route path="/" element={<Navbar />}>
+          <Route path="/mentee" element={<Navbar />}>
             <Route index element={<Home />} />
+            <Route path='profile' element={<ProfileMentee/>} />
           </Route>
 
           {/* mentor routes are here */}
