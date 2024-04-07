@@ -12,6 +12,7 @@ import Reviews from "./pages/mentor/Reviews";
 import ProfileMentee from "./pages/mentee/Profile";
 import Home from "./pages/user/Home";
 import ProfileMentor from "./pages/mentee/ProfileMentor";
+import AllMentors from "./pages/common/AllMentors";
 
 
 function App() {
@@ -21,16 +22,16 @@ function App() {
       <BrowserRouter>
         <Routes>
 
-          {/* user routes are here */}
-          <Route path="/" element={<Navbar />}>
-            <Route index element={<Home />} />
-            <Route path='profile/mentor/:id' element={<ProfileMentor/>} />
-          </Route>
+          {/* Public routes are here */}
 
+          <Route path="/mentors" element={<AllMentors/>}/>
+
+          {/* user routes are here */}
           <Route path="/mentee" element={<Navbar />}>
             <Route index element={<Home />} />
             <Route path='profile' element={<ProfileMentee/>} />
           </Route>
+
 
           {/* mentor routes are here */}
           <Route path="/mentor/" element={<SidebarWithHeader />}>
