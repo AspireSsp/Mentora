@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 import { baseUrl } from "../../api/apis";
 import axios from "axios"; 
+import {Box} from "@chakra-ui/react"
 
 const AllMentors = () => {
     const [mentors, setMentors] = useState([]);
@@ -23,9 +24,11 @@ const AllMentors = () => {
       };
 
   return (
-    <div>
-      <Card data={mentors} />
-    </div>
+    <Box display={'flex'}  backgroundColor={'#7a7a7a20'} justifyContent={'center'}>
+        <Box width={'80%'}p={10}>
+        <Card data={mentors} />
+    </Box>
+    </Box>
   );
 };
 
