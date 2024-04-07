@@ -6,10 +6,11 @@ import StarRating from '../../component/StarRating';
 import { formatDate } from '../../utills/formateDate';
 import LeftChat from '../../component/LeftChat';
 import RightChat from '../../component/RightChat';
-import { io } from "socket.io-client";
+import  io  from "socket.io-client";
 
-const socket = io('http://localhost:8000', { transports: ['websocket', 'polling', 'flashsocket'] });
-
+// var socket = io('https://yourDomain:8000');
+const ENDPOINT = "http://localhost:8000"; // "https://talk-a-tive.herokuapp.com"; -> After deployment
+var socket, selectedChatCompare;
 
 const Chat = () => {
     const { id } = useParams();
@@ -25,19 +26,22 @@ const Chat = () => {
     };
     
     useEffect(() => {
-        socket.on('connect_error', (error) => {
-            console.error('Socket connection error:', error.message);
-        });
-        socket.on('connect', () => {
-            console.log("si df dwkjv dekjn denkjfnejn kjdnk"); // x8WIv7-mJelg7on_ALbx
-          });
+        socket = io(ENDPOINT);
+        socket.emit("setup", user);
+        socket.on("connected", () => console.log("connected"));
+        socket.on("typing", () => console.log("typeing"));
+        socket.on("stop typing", () => console.log("stopr"));
+    
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
-        socket.on('recieve message', (message) => {
+        socket.on('message-response', (message) => {
+            console.log("resss------>", message);
             setMessages((prevMessages) => [...prevMessages, message]);
         });
     }, []);
+
 
     const sendMessage = () => {
         const message = {
@@ -47,7 +51,7 @@ const Chat = () => {
             chat: id,
         }
         console.log("message body--", message);
-        socket.emit('chat-message', message);
+        socket.emit("new message", message);
         setInput('');
     };
 

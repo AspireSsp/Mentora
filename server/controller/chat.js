@@ -33,3 +33,15 @@ exports.getChatById = async (req, res) => {
         res.status(404).json({ success: false, error: 'Chat not found' });
     }
 };
+
+
+exports.getMyChats = async (req, res) => {
+    try {
+        const mentorId = req.user._id;
+        const existingChat = await Chat.find({ mentorId }).populate('menteeId');
+
+        res.status(201).json({ success: true, chats: existingChat });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+};
