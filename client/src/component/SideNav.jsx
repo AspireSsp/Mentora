@@ -94,11 +94,7 @@ const SidebarContent = ({ onClose, user, ...rest }) => {
 
 const NavItem = ({ icon,link, children, ...rest }) => {
 
-  const logout =()=>{
-    localStorage.removeItem('token');
-    sessionStorage.removeItem('token');
-    navigate(`/login`)
-  }
+  
   return (
     <Box
       as="a"
