@@ -22,6 +22,7 @@ import {
   MenuItem,
   MenuList,
   useToast,
+  Image
 
 } from '@chakra-ui/react'
 import {
@@ -45,6 +46,7 @@ import { UserState } from '../context/user';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+import logo from "../assets/Mentora-logo.png"
 
 
 const LinkItems = [
@@ -56,6 +58,8 @@ const LinkItems = [
 ]
 
 const SidebarContent = ({ onClose, user, ...rest }) => {
+  const navigate = useNavigate();
+
   return (
     <Box
       transition="3s ease"
@@ -67,9 +71,8 @@ const SidebarContent = ({ onClose, user, ...rest }) => {
       h="full"
       {...rest}>
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
-        </Text>
+      <Image src={logo} alt="Mentora Logo" width={250} onClick={()=>navigate('/')} cursor='pointer' />
+
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
@@ -121,6 +124,8 @@ const NavItem = ({ icon,link, children, ...rest }) => {
 }
 
 const MobileNav = ({ onOpen, user, ...rest }) => {
+  const navigate = useNavigate();
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -140,16 +145,10 @@ const MobileNav = ({ onOpen, user, ...rest }) => {
         icon={<FiMenu />}
       />
 
-      <Text
-        display={{ base: 'flex', md: 'none' }}
-        fontSize="2xl"
-        fontFamily="monospace"
-        fontWeight="bold">
-        Logo
-      </Text>
+<Image display={{ base: 'flex', md: 'none' }} src={logo} alt="Mentora Logo" width={250} onClick={()=>navigate('/')} cursor='pointer' />
+
 
       <HStack spacing={{ base: '0', md: '6' }}>
-        <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} />
         <Flex alignItems={'center'}>
           <Menu>
             <MenuButton py={2} transition="all 0.3s" _focus={{ boxShadow: 'none' }}>
@@ -157,7 +156,7 @@ const MobileNav = ({ onOpen, user, ...rest }) => {
                 <Avatar
                   size={'sm'}
                   src={
-                    user?.profile
+                    user?.pic
                   }
                 />
                 <VStack
@@ -170,20 +169,10 @@ const MobileNav = ({ onOpen, user, ...rest }) => {
                     Mentor
                   </Text>
                 </VStack>
-                <Box display={{ base: 'none', md: 'flex' }}>
-                  <FiChevronDown />
-                </Box>
+                
               </HStack>
             </MenuButton>
-            <MenuList
-              bg={useColorModeValue('white', 'gray.900')}
-              borderColor={useColorModeValue('gray.200', 'gray.700')}>
-              <MenuItem>Profile</MenuItem>
-              <MenuItem>Settings</MenuItem>
-              <MenuItem>Billing</MenuItem>
-              <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
-            </MenuList>
+            
           </Menu>
         </Flex>
       </HStack>

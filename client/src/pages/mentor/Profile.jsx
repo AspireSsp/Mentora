@@ -128,7 +128,7 @@ const Profile = () => {
                                         </div>
                                         <ul class="list-inside space-y-2">
                                             {
-                                                user?.experience && user?.experience.map((experience, index)=>(
+                                                user?.experience && user?.experience?.map((experience, index)=>(
                                                     <li key={index}>
                                                         <div class="text-teal-600">{experience?.role} at {experience?.company}</div>
                                                         <div class="text-gray-500 text-xs">{formatDate(experience?.startDate)} to {formatDate(experience?.endDate)}</div>

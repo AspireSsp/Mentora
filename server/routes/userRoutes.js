@@ -1,6 +1,6 @@
 const express = require('express');
 const { register, login, getUser, updateMentorProfile, updateMenteeProfile, getAllRatingsOfMentor, getAllUsers, getMentorById } = require('../controller/user');
-const {payment, saveTransaction} = require('../controller/payment')
+const {payment, saveTransaction, getAllTransactions} = require('../controller/payment')
 const authenticate = require('../middlewares/auth');
 const router = express.Router();
 
@@ -23,6 +23,7 @@ router.route("/mentee/update").patch(authenticate, updateMenteeProfile);
 //payment
 router.route("/create-payment").post(payment);
 router.route("/save-transaction").post(saveTransaction)
+router.route("/getAll-transaction").get(getAllTransactions)
 
 
 

@@ -58,3 +58,14 @@ exports.saveTransaction = async (req, res) => {
       .json({ success: false, message: error });
   }
 };
+
+exports.getAllTransactions = async (req, res) => {
+  try {
+    const transactions = await Transaction.find(); 
+
+    res.status(200).json({ success: true, transactions: transactions });
+  } catch (error) {
+    console.error("Error retrieving transactions:", error);
+    res.status(500).json({ success: false, message: error });
+  }
+};

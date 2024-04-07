@@ -71,7 +71,7 @@ const StartChat = ({ startChat, user, mentor }) => {
                 <AlertDialogOverlay>
                     <AlertDialogContent>
                         <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-                            Delete Customer
+                            Wallet Balance
                         </AlertDialogHeader>
 
                         <AlertDialogBody>
@@ -90,7 +90,7 @@ const StartChat = ({ startChat, user, mentor }) => {
                         <AlertDialogFooter w={"100%"}>
                             <div className='flex justify-between w-[100%]'>
                                 <div>
-                                    <Button colorScheme='green' onClick={()=>navigate(`/payment/${mentor.id}`)} ml={3}>
+                                    <Button colorScheme='green' onClick={()=>navigate(`/payment/${user.id}`)} ml={3}>
                                         Add Balance
                                     </Button>
                                 </div>

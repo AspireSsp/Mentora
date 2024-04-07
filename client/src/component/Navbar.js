@@ -127,9 +127,9 @@ export default function WithAction() {
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>
-            <Button variant={"solid"} backgroundColor={"#22c55e"} color={"white"} size={"sm"} mr={4}>
+            <Text variant={"solid"} backgroundColor={"#22c55e"} color={"white"} borderRadius={10} fontWeight={500} textTransform={'capitalize'} size={"sm"} px={4} py={2} mr={4}>
               {user?.userName}
-            </Button>
+            </Text>
             <Menu>
               <MenuButton
                 as={Button}
@@ -149,6 +149,27 @@ export default function WithAction() {
               <Link to={`/mentee/profile`}> 
                <MenuItem>Profile</MenuItem>
               </Link> 
+              <MenuItem>Wallet: &#8377;{user?.wallet} 
+              <Button variant={"solid"} backgroundColor={"#3182ce"} color={"white"} borderRadius={5} fontWeight={500} textTransform={'capitalize'} size={"sm"} ml={4}
+               style={{
+                backgroundColor: '#3182ce',
+                color: 'white',
+                borderRadius: '5px',
+                fontWeight: '500',
+                textTransform: 'capitalize',
+                padding: '0.5rem 1rem',
+                marginLeft: '0.5rem',
+                transition: 'background-color 0.3s, color 0.3s', // Transition effect
+              }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = '#4299e1'} // Change background color on hover
+              onMouseLeave={(e) => e.target.style.backgroundColor = '#3182ce'}
+              onClick={()=>navigate(`/payment/${user.id}`)}
+              >
+              add balance
+            </Button>
+              </MenuItem>
+              <MenuItem  onClick={()=>navigate(`/mentee/transactions`)}>Transactions</MenuItem>
+
                 <MenuDivider />
                <MenuItem  onClick={logout}>Log out</MenuItem>
               </MenuList>

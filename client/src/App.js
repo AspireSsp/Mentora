@@ -15,6 +15,7 @@ import ProfileMentor from "./pages/mentee/ProfileMentor";
 import AllMentors from "./pages/common/AllMentors";
 import MenteeChat from './pages/mentee/Chat'
 import Checkout from "./pages/mentee/Checkout";
+import Transactions from "./pages/mentee/Transactions";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Route path="/mentee" element={<Navbar />}>
             <Route index element={<Home />} />
             <Route path='profile' element={<ProfileMentee/>} />
+            <Route path='transactions' element={<Transactions/>} />
           </Route>
 
 
