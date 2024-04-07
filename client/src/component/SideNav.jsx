@@ -22,7 +22,8 @@ import {
   MenuItem,
   MenuList,
   useToast,
-  Image
+  Image,
+  Button,
 
 } from '@chakra-ui/react'
 import {
@@ -55,11 +56,16 @@ const LinkItems = [
   { name: 'Clients', icon: FiUsers, link: 'clients' },
   { name: 'Payments', icon: MdPayment, link: 'payments' },
   { name: 'Reviews', icon: FiStar, link: 'reviews' },
+
 ]
 
 const SidebarContent = ({ onClose, user, ...rest }) => {
   const navigate = useNavigate();
-
+  const logout =()=>{
+    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+    navigate(`/login`)
+  }
   return (
     <Box
       transition="3s ease"
@@ -87,6 +93,12 @@ const SidebarContent = ({ onClose, user, ...rest }) => {
 }
 
 const NavItem = ({ icon,link, children, ...rest }) => {
+
+  const logout =()=>{
+    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+    navigate(`/login`)
+  }
   return (
     <Box
       as="a"
@@ -125,7 +137,11 @@ const NavItem = ({ icon,link, children, ...rest }) => {
 
 const MobileNav = ({ onOpen, user, ...rest }) => {
   const navigate = useNavigate();
-
+  const logout =()=>{
+    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+    navigate(`/login`)
+  }
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -151,6 +167,9 @@ const MobileNav = ({ onOpen, user, ...rest }) => {
       <HStack spacing={{ base: '0', md: '6' }}>
         <Flex alignItems={'center'}>
           <Menu>
+            <Button onClick={logout}>
+              Logout
+            </Button>
             <MenuButton py={2} transition="all 0.3s" _focus={{ boxShadow: 'none' }}>
               <HStack pr={6} >
                 <Avatar

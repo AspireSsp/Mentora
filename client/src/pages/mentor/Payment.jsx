@@ -14,9 +14,10 @@ const Payment = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(baseUrl + 'user/getAll-transaction');
-        setTransactions(response.data.transactions.filter(user.id));
+console.log(user.id)
+        setTransactions(response.data.transactions.filter((transaction) => transaction.userId === user.id));
       } catch (error) {
-        setError('Error fetching transactions. Please try again later.');
+        setError('No Data to show you now');
       } finally {
         setLoading(false);
       }
