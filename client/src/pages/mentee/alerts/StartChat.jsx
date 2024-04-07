@@ -12,16 +12,16 @@ import {
     Text,
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
+import { post } from '../../../api/apis';
 
 
 const StartChat = ({ startChat, user, mentor }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const navigate = useNavigate();
     const cancelRef = React.useRef()
-
     const [balence, setBalence] = useState();
     const [min, setMin] = useState();
-    console.log("min------->",min);
+
     useEffect(() => {
         if (user && mentor) {
             setBalence(user.wallet);
@@ -31,9 +31,24 @@ const StartChat = ({ startChat, user, mentor }) => {
         }
     }, [user, mentor])
 
-    const handleStartChat = () => {
-        startChat();
+    const handleStartChat = async () => {
+        if(balence <min ){
+            navigate('/mentee/payment')
+        }else{
+            const res = await post('chat/add', {mentorId : mentor._id})
+            console.log(res);
+            if(res.statusCode === 201){
+                navigate(`/chat/${res?.data?.chat?._id}`);
+            }else{
+                navigate('/mentee/payment')
+            }
+        }
         onClose();
+    }
+    const handleAddBalance = ()=>{
+        navigate('/mentee/payment')
+        onClose();
+
     }
 
     const calculateTimeFromWallet = (walletBalance, chargesPerMinute) => {
@@ -67,8 +82,9 @@ const StartChat = ({ startChat, user, mentor }) => {
                                 Your Wallet balance is <span className={ balence > 50 ? "text-green-500 font-bold" : "text-red-500 font-bold" }>{balence}/-</span>.
                             </Text>
                             <Text>
-                                You can chat <span className={ balence > 50 ? "text-green-500 font-bold" : "text-red-500 font-bold" }>{min} min</span> only.
+                                You can chat with this balence:  <span className={ balence > 50 ? "text-green-500 font-bold" : "text-red-500 font-bold" }>{min} min</span> only.
                             </Text>
+                            <p className='font-normal text-sm text-red-500 mt-3'>If your balence is less then a min, you will be redirected to payment page</p>
                         </AlertDialogBody>
 
                         <AlertDialogFooter w={"100%"}>
