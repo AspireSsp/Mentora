@@ -78,7 +78,7 @@ const EditProfile = () => {
 
     return (
         <>
-            <Button onClick={onOpen}> <FaPencil /></Button>
+            <Button mt={2} colorScheme='blue' onClick={onOpen}> Edit</Button>
     
             <Modal isOpen={isOpen} onClose={onClose} >
                 <ModalOverlay />

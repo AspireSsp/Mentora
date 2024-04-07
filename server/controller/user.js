@@ -130,8 +130,8 @@ exports.updateMentorProfile = async (req, res) => {
     try {
        
         // Find mentor by ID
+        console.log(req.user);
         const mentor = await Mentor.findById(req.user._id);
-
         // Check if mentor exists
         if (!mentor) {
             return res.status(404).json({
@@ -173,3 +173,22 @@ exports.updateMenteeProfile = async (req, res) => {
     }
 };
 
+exports.getAllRatingsOfMentor = async (req, res) => {
+    try {
+        const mentor = await Mentor.findById(req.user._id)
+            .populate({
+            path: 'ratings.userId',
+            select: 'name pic', // Select only the name and pic fields from the related user
+            })
+    
+        if (!mentor) {
+            throw new Error('Mentor not found');
+        }
+        
+        res.status(200).json({ success: true, message: "Your ratings retrieve successfully", ratings: mentor.ratings });
+      
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error', message: error.message });
+    }
+  };
