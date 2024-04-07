@@ -5,12 +5,14 @@ const chatSchema = new mongoose.Schema({
     name: {
         type: String
     },
-    members: [
-        { 
-            type: mongoose.Schema.Types.ObjectId, 
-            ref: 'User' 
-        }
-    ],
+    menteeId: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User' 
+    },
+    mentorId: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User' 
+    }
 }, { timestamps: true });
 
 const Chat = mongoose.model('Chat', chatSchema);

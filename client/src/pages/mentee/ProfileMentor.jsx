@@ -9,6 +9,7 @@ import StarRating from '../../component/StarRating';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserState } from '../../context/user';
 import StartChat from './alerts/StartChat';
+import { Tooltip } from '@chakra-ui/react'
 
 const ProfileMentor = () => {
     const { user, setUser } = UserState();
@@ -82,7 +83,13 @@ const ProfileMentor = () => {
                                     </li>
                                 </ul>
                                 <div className='mt-2'>
-                                    <StartChat startChat={startChat} user={user} mentor={mentor} />
+                                    {
+                                        mentor?.active ? 
+                                            <StartChat startChat={startChat} user={user} mentor={mentor} />
+                                            :  <Tooltip label='Mentor is not available now.'>
+                                                    <button disabled={true} className='bg-gray-500 w-[100%] py-2 text-white rounded-lg hover:bg-gray-600'>Start Chat</button>
+                                                </Tooltip>
+                                    }
                                 </div>
                             </div>
                         </div>

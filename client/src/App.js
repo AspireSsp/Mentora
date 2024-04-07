@@ -13,7 +13,7 @@ import ProfileMentee from "./pages/mentee/Profile";
 import Home from "./pages/user/Home";
 import ProfileMentor from "./pages/mentee/ProfileMentor";
 import AllMentors from "./pages/common/AllMentors";
-
+import MenteeChat from './pages/mentee/Chat'
 
 function App() {
    
@@ -30,6 +30,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/mentors" element={<AllMentors/>}/>
             <Route path="/mentors/profile/:id" element={<ProfileMentor/>}/>
+            <Route path="/chat/:id" element={<MenteeChat/>}/>
           </Route>
 
           <Route path="/mentee" element={<Navbar />}>
