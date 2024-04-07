@@ -79,11 +79,8 @@ export default function WithAction() {
           setUser(res.data.user);
           if (res.data.user.role === "Mentor") {
             navigate("/mentor");
-          } else if (res.data.user.role === "Mentee") {
-            navigate("/mentee");
-          } else {
-            console.log("Inavlid Role");
-          }
+          } 
+          
         }
       } catch (error) {
         navigate("/login");

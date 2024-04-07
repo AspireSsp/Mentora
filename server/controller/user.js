@@ -208,3 +208,23 @@ exports.getAllRatingsOfMentor = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error', message: error.message });
     }
   };
+exports.getMentorById = async (req, res) => {
+    try {
+        const { id } = req.params
+        const mentor = await Mentor.findById(id)
+            .populate({
+            path: 'ratings.userId',
+            select: 'name pic', // Select only the name and pic fields from the related user
+            })
+    
+        if (!mentor) {
+            throw new Error('Mentor not found');
+        }
+        
+        res.status(200).json({ success: true, message: "Your ratings retrieve successfully", mentor });
+      
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error', message: error.message });
+    }
+  };

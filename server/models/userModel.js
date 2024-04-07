@@ -80,7 +80,10 @@ const menteeSchema = new mongoose.Schema({
     education: String,
     address: String,
     gender: String,
-    wallet: Number,
+    wallet: {
+        type: Number,
+        default: 50,
+    },
 }, options);
 
 // Define the mentor schema

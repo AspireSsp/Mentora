@@ -24,9 +24,14 @@ function App() {
 
           {/* Public routes are here */}
 
-          <Route path="/mentors" element={<AllMentors/>}/>
 
           {/* user routes are here */}
+          <Route path="/" element={<Navbar />}>
+            <Route index element={<Home />} />
+            <Route path="/mentors" element={<AllMentors/>}/>
+            <Route path="/mentors/profile/:id" element={<ProfileMentor/>}/>
+          </Route>
+
           <Route path="/mentee" element={<Navbar />}>
             <Route index element={<Home />} />
             <Route path='profile' element={<ProfileMentee/>} />

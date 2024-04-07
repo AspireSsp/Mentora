@@ -1,5 +1,5 @@
 const express = require('express');
-const { register, login, getUser, updateMentorProfile, updateMenteeProfile, getAllRatingsOfMentor, getAllUsers } = require('../controller/user');
+const { register, login, getUser, updateMentorProfile, updateMenteeProfile, getAllRatingsOfMentor, getAllUsers, getMentorById } = require('../controller/user');
 const authenticate = require('../middlewares/auth');
 const router = express.Router();
 
@@ -11,6 +11,7 @@ router.route("/getAll").get(getAllUsers);
 // mentor
 router.route("/mentor/update").patch(authenticate, updateMentorProfile);
 router.route("/mentor/ratings").get(authenticate, getAllRatingsOfMentor);
+router.route("/mentor/:id").get(getMentorById);
 
 
 
