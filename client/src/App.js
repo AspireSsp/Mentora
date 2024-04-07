@@ -11,6 +11,7 @@ import Payment from "./pages/mentor/Payment";
 import Reviews from "./pages/mentor/Reviews";
 import ProfileMentee from "./pages/mentee/Profile";
 import Home from "./pages/user/Home";
+import ProfileMentor from "./pages/mentee/ProfileMentor";
 import AllMentors from "./pages/common/AllMentors";
 
 

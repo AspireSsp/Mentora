@@ -23,6 +23,7 @@ const EditAbout = () => {
     const [email, setEmail] = useState("")
     const [address, setAddress] = useState("")
     const [age, setAge] = useState("")
+    const [chargesPerMin, setChargesPerMin] = useState(0)
 
     useEffect(() => {
         if (user) {
@@ -31,11 +32,12 @@ const EditAbout = () => {
             setEmail(user.email || "");
             setAddress(user.address || "");
             setAge(user.age || "");
+            setChargesPerMin(user.chargesPerMin || "");
         }
     }, [user])
     
     const updateProfile = async()=>{
-        const body = {gender, mobile, email, address, age}
+        const body = {gender, mobile, email, address, age, chargesPerMin}
         console.log(body);
         const res = await patch('user/mentor/update', body);
         console.log(res);
@@ -83,7 +85,13 @@ const EditAbout = () => {
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="birthday">
                                     Age
                                 </label>
-                                <input value={age} onChange={(e)=>{setAge(e.target.value)}} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="birthday" type="text" placeholder="63" />
+                                <input value={age} onChange={(e)=>{setAge(e.target.value)}} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="birthday" type="number" placeholder="63" />
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="birthday">
+                                    Charges Per Min
+                                </label>
+                                <input value={chargesPerMin} onChange={(e)=>{setChargesPerMin(e.target.value)}} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="birthday" type="number" placeholder="63" />
                             </div>
                         </form>
                     </div>
