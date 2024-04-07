@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import EditAbout from './dialogBoxes/EditAbout'
 import EditProfile from './dialogBoxes/EditProfile'
 import { UserState } from '../../context/user';
 import { formatDate } from '../../utills/formateDate';
 import EditExperience from './dialogBoxes/EditExperience';
 
-const Profile = () => {
-    const { user, setUser } = UserState();
+const ProfileMentor = () => {
+    const { user, setUser } = useState();
 
     return (
         <div>
@@ -22,7 +22,7 @@ const Profile = () => {
                                 </div>
                                 <div className='flex justify-between'>
                                     <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{user?.name}</h1>
-                                    <EditProfile user={user} />
+                                    {/* <EditProfile user={user} /> */}
                                 </div>
                                 <h3 class="text-gray-600 font-lg text-semibold leading-6">{user?.title}</h3>
                                 <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">{user?.bio}</p>
@@ -50,7 +50,7 @@ const Profile = () => {
                             <div class="bg-white p-3 shadow-sm rounded-sm">
                                 <div className='flex justify-end'>
                                     {/* <button className='bg-blue-500 border rounded-lg px-4 py-2 text-white font-medium'>Edit</button> */}
-                                    <EditAbout user={user} />
+                                    {/* <EditAbout user={user} /> */}
                                 </div>
                                 <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                                     <span clas="text-green-500">
@@ -112,7 +112,7 @@ const Profile = () => {
                             <div class="bg-white p-3 shadow-sm rounded-sm">
 
                                 <div className='flex justify-end'>
-                                    <EditExperience />
+                                    {/* <EditExperience /> */}
                                 </div>
                                 <div class="grid grid-cols-2">
                                     <div>
@@ -174,4 +174,4 @@ const Profile = () => {
     )
 }
 
-export default Profile
+export default ProfileMentor

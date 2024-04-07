@@ -90,6 +90,7 @@ const mentorSchema = new mongoose.Schema({
     bio: String,
     age: String,
     address: String,
+    chargesPerMin: Number,
     gender: String,
     active: {
         type: Boolean,

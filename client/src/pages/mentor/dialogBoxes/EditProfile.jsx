@@ -21,6 +21,7 @@ import {
     AvatarBadge,
     IconButton,
     Center,
+    Select,
 } from '@chakra-ui/react'
 import { SmallCloseIcon } from '@chakra-ui/icons'
 import { FaPencil } from "react-icons/fa6";
@@ -38,6 +39,7 @@ const EditProfile = () => {
     const [title, setTitle] = useState("");
     const [bio, setBio] = useState("");
     const [pic, setPic] = useState("");
+    const [active, setActive] = useState(false);
     const [selectedFile, setSelectedFile] = useState();
 
 
@@ -47,13 +49,18 @@ const EditProfile = () => {
             setTitle(user.title || "");
             setBio(user.bio || "");
             setPic(user.pic || "");
+            setActive(user.active || false);
         }
     }, [user])
     
     const updateProfile = async()=>{
-        const image = await uploadImage();
-        console.log(selectedFile);
-        const body = {pic: image, bio, title, name}
+        let body;
+        if(selectedFile){
+            const image = await uploadImage();
+            body = {pic:image, bio, title, name, active}
+        }else{
+            body = {bio, title, name, active}
+        }
         console.log(body);
         const res = await patch('user/mentor/update', body);
         console.log(res);
@@ -146,6 +153,13 @@ const EditProfile = () => {
                                 _placeholder={{ color: 'gray.500' }}
                                 type="text"
                             />
+                            </FormControl>
+                            <FormControl id="bio" isRequired>
+                                <FormLabel>Status</FormLabel>
+                                <Select value={active} onChange={(e)=>{setActive(e.target.value)}}>
+                                    <option value="true">True</option>
+                                    <option value="false">False</option>
+                                </Select>
                             </FormControl>
                             <FormControl id="bio" isRequired>
                             <FormLabel>Bio</FormLabel>

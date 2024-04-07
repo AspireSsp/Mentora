@@ -11,6 +11,7 @@ import Payment from "./pages/mentor/Payment";
 import Reviews from "./pages/mentor/Reviews";
 import ProfileMentee from "./pages/mentee/Profile";
 import Home from "./pages/user/Home";
+import ProfileMentor from "./pages/mentee/ProfileMentor";
 
 
 function App() {
@@ -21,6 +22,11 @@ function App() {
         <Routes>
 
           {/* user routes are here */}
+          <Route path="/" element={<Navbar />}>
+            <Route index element={<Home />} />
+            <Route path='profile/mentor/:id' element={<ProfileMentor/>} />
+          </Route>
+
           <Route path="/mentee" element={<Navbar />}>
             <Route index element={<Home />} />
             <Route path='profile' element={<ProfileMentee/>} />
