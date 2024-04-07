@@ -26,26 +26,29 @@ import { useEffect } from "react";
 import { baseUrl } from "../api/apis";
 import logo from "../assets/Mentora-logo.png"
 
-const Links = ["Dashboard", "Projects", "Team"];
+const Links = [
+    { displayName: "Home", route: "mentee" },
+  { displayName: "Mentors", route: "mentors" },
+];
 
-const NavLink = (props) => {
-  const { children } = props;
-  return (
-    <Box
-      as="a"
-      px={2}
-      py={1}
-      rounded={"md"}
-      _hover={{
-        textDecoration: "none",
-        bg: useColorModeValue("gray.200", "gray.700"),
-      }}
-      href={"#"}
-    >
-      {children}
-    </Box>
-  );
-};
+const NavLink = ({ to, children }) => {
+    return (
+      <Link to={to}>
+        <Box
+          as="span"
+          px={2}
+          py={1}
+          rounded="md"
+          _hover={{
+            textDecoration: "none",
+            bg: useColorModeValue("gray.200", "gray.700"),
+          }}
+        >
+          {children}
+        </Box>
+      </Link>
+    );
+  };
 
 export default function WithAction() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -106,20 +109,22 @@ export default function WithAction() {
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
           />
-          <HStack spacing={8} alignItems={"center"}>
+          <HStack spacing={8} alignItems={"center"} width={'100%'} justifyContent={'space-between'} mx={8}>
           <Image src={logo} alt="Mentora Logo" width={250} />
             <HStack
               as={"nav"}
               spacing={4}
               display={{ base: "none", md: "flex" }}
+              fontSize={'18px'}
+              fontWeight={500}
             >
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+              {Links.map(({displayName,route}) => (
+                <NavLink key={route} to={`/${route}`}>{displayName}</NavLink>
               ))}
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>
-            <Button variant={"solid"} colorScheme={"teal"} size={"sm"} mr={4}>
+            <Button variant={"solid"} backgroundColor={"#22c55e"} color={"white"} size={"sm"} mr={4}>
               {user?.userName}
             </Button>
             <Menu>
@@ -131,18 +136,26 @@ export default function WithAction() {
                 minW={0}
               >
                 <Avatar
-                  size={"sm"}
+                  size={"md"}
                   src={
                     "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
                   }
                 />
               </MenuButton>
-              <MenuList>
+              <MenuList fontWeight={600} fontSize={'16px'}>
               <Link to={`/mentee/profile`}> {/* Use Link component */}
-        <MenuItem>Profile</MenuItem>
-      </Link>                <MenuItem>Link 2</MenuItem>
+               <MenuItem>Profile</MenuItem>
+              </Link> 
+              <Link to={`/mentee/profile`}> {/* Use Link component */}
+               <MenuItem></MenuItem>
+              </Link> 
+              <Link to={`/mentee/profile`}> {/* Use Link component */}
+               <MenuItem></MenuItem>
+              </Link> 
                 <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
+              <Link to={`/mentee/`}> {/* Use Link component */}
+               <MenuItem>Log out</MenuItem>
+              </Link>                
               </MenuList>
             </Menu>
           </Flex>

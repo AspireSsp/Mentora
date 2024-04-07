@@ -173,3 +173,19 @@ exports.updateMenteeProfile = async (req, res) => {
     }
 };
 
+exports.getAllUsers = async (req, res) => {
+    try {
+        const role = req.query.role; 
+        const users = await User.find({ role });
+        res.status(200).json({
+            success: true,
+            message: `Users with role ${role} retrieved successfully.`,
+            users
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: 'Internal Server Error',
+            message: error.message
+        });
+    }
+};
